@@ -1,1 +1,2 @@
-# The-Magic-Shelf
+user: ADMIN
+pass: Admin_1
