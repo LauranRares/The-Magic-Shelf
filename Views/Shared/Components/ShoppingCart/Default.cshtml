@@ -1,0 +1,23 @@
+﻿@model bool
+
+@if (Model == true)
+{
+        <li>
+            <a class="navlink" asp-area="User" asp-controller="CartActions" asp-action="ShoppingCart">
+                <i class="fa fa-solid fa-cart-arrow-down" style="color: #cc3300;"></i>
+            </a>
+        </li>
+}
+@if (Model == false)
+{
+         <li>
+             <a class="navlink" asp-area="User" asp-controller="CartActions" asp-action="ShoppingCart"><i class="fa fa-shopping-cart"></i></a>
+        </li>
+}
+
+
+
+
+
+
+
