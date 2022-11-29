@@ -1,0 +1,100 @@
+﻿@page
+@model EditInfoModel
+@{
+    Layout = "_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Edit info -";
+    ViewData["ActivePage"] = ManageNavPages.EditInfo;
+}
+
+<html lang="en">
+<head>
+    <title></title>
+
+    <style>
+
+        .form {
+            display:block;
+            font-family: 'Times New Roman';
+            font-size: 25px;
+            font-weight: bold;
+            padding: 10px;
+            margin-left:10px;
+            position:relative;
+       }
+
+       .tempdata {
+            color: #cc3300;
+            font-family: 'White Storm';
+            font-size: 35px;
+            position: absolute;
+            margin-left: 420px;
+            top: 280px;
+       }
+
+       .button {
+            border: 4px solid #3a2613;
+            background-color: #88cc00;
+            padding: 15px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 30px;
+            position: absolute;
+            top: 341px;
+            margin-left: 420px;
+       }
+
+        .button:hover {
+            opacity: 0.7;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <span style="margin-top: -130px; margin-left:220px; color: #cc3300;  font-family: 'White Storm'; font-size: 45px; position:absolute;">@TempData["Info"]</span>
+
+    <form class="form" method="post">
+      <label for="name">Name:</label><br />
+        <input type="text" id="name" asp-for="Input.Name" size="50" required />
+      <br /><br />
+
+      <label for="location">Town/village:</label><br />
+        <input type="text" id="location" asp-for="Input.Location" size="50" required />
+      <br /><br />
+
+
+      <label for="address">Address (street & numbers):</label><br />
+        <input type="text" id="address" asp-for="Input.Address" size="50" required />
+      <br /><br />
+
+
+      <label for="phone">Phone number:</label><br />
+        <input type="text" id="phone" asp-for="Input.PhoneNumber" size="50" required />
+      <br /><br />
+
+      <label for="credit">Credit card (add a false one):</label><br />
+        <input type="text" id="credit" asp-for="Input.CreditCard" size="50" required />
+      <br /><br />
+
+      <div style="position:absolute; margin-top: -432px; margin-left: 410px;">
+      <label for="pet">Pet name </label><br />
+        <input type="text" id="pet" asp-for="Input.Pet" size="50" required />
+        <br /><br />
+      </div>
+
+        <span class="tempdata" style="color: #009900;">@TempData["Updated"]</span>
+        <span class="tempdata">@TempData["Mistake"]</span>
+
+      <input type="submit" class="button" value="Save" />
+  </form>
+
+</body>
+</html>
+
+@section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+}

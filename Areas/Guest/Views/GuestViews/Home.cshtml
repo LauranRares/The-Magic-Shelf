@@ -1,0 +1,52 @@
+﻿<html lang="en">
+<head>
+    <title>@ViewData["Title"] The Magic Shelf - Home</title>
+
+    <style>
+        .home {
+            font-family: 'White Storm';
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .links {
+            color: #ad7138;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .links:hover {
+                transform: scale(1.1);
+                color: #c78a52;
+                text-decoration: underline;
+            }
+
+            .links:active {
+                color: black;
+                text-decoration: none;
+            }
+
+    </style>
+</head>
+
+<body>
+
+    <h2 class="home" style="font-size:40px; color: #009900;;">@TempData["Deleted"]</h2>
+
+    <div class="home">
+        <h1>Welcome to</h1>
+        <h1 style="font-size: 150px;">The Magic Shelf</h1>
+        <br />
+
+        <div style="color: #3a2613;">
+            <p>Check out our collection of <a class="links" asp-area="Guest" asp-controller="GuestViews" asp-action="Books">books</a>.</p>
+            <p>Don't forget to <a class="links" asp-area="Identity" asp-page="/Account/Login">log in</a> and</p>
+            <p>order your favourites.</p>
+            <p>If you don't have an account, <a class="links" asp-area="Identity" asp-page="/Account/Register">register now!</a></p>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
