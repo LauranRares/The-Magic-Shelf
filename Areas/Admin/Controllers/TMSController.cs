@@ -82,7 +82,7 @@ namespace TMS.Areas.Admin.Controllers
         {
             var check = ModelState["Price"];
 
-            if (!check.Errors.Any() && editing.Genre1 != editing.Genre2)
+            if (!check.Errors.Any()) // && editing.Genre1 != editing.Genre2)
             {
                 _db.DbBooks.Update(editing);
                 _db.SaveChanges();
