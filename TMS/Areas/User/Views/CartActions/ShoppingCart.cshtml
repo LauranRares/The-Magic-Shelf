@@ -1,0 +1,185 @@
+﻿@model List<TheShoppingCart>
+
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] The Magic Shelf - Shopping Cart</title>
+
+    <style>
+        table {
+            border: 5px solid #4d2600;
+            border-collapse: collapse;
+            width: 1000px;
+            text-align: center;
+            margin-left: 260px;
+            table-layout: fixed;
+        }
+
+        th {
+            font-family: 'White Storm';
+            font-size: 30px;
+        }
+
+        td {
+            font-family: 'Times New Roman';
+            font-size: 20px;
+            color: #3a2613;
+        }
+
+        th, td {
+            border: 3px solid #4d2600;
+            padding: 10px;
+        }
+
+        .temp {
+            font-family: 'White Storm';
+            font-size: 50px;
+            position: absolute;
+            margin-top: -80px;
+            margin-left: 400px;
+            color: #cc3300;
+        }
+
+        .time {
+            font-family: 'White Storm';
+            font-size: 40px;
+            color: #3a2613;
+            margin-left: 900px;
+        }
+
+        .button1a {
+            border: 3px solid #3a2613;
+            background-color: #ffdf80;
+            height: 28px;
+            top: 5px;
+            left: 650px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 30px;
+            position: absolute;
+            text-decoration: none;
+        }
+
+        .button1b {
+            border: 3px solid #3a2613;
+            background-color: #ffdf80;
+            height: 28px;
+            top: 45px;
+            left: 650px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 30px;
+            position: absolute;
+            text-decoration: none;
+        }
+
+        .button2 {
+            border: 4px solid #3a2613;
+            background-color: #cc3300;
+            padding: 10px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 30px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .button3 {
+            border: 4px solid #3a2613;
+            background-color: #668cff;
+            padding: 15px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 30px;
+            display: block;
+        }
+
+        .button4 {
+            border: 4px solid #3a2613;
+            background-color: #88cc00;
+            padding: 15px 15px;
+            height: 50px;
+            top: 5px;
+            left: 260px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 40px;
+            position: absolute;
+            text-align: center;
+            text-decoration: none;
+        }
+
+            .button1:hover, .button2:hover, .button3:hover, .button4:hover {
+                opacity: 0.7;
+            }
+
+        .order {
+            border: 5px solid #4d2600;
+            margin-left: 815px;
+            width: 435px;
+            height: 100px;
+            font-family: 'White Storm';
+            position: relative;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th style="width: 75px;"><h3>No.</h3></th>
+            <th><h3>Title</h3></th>
+            <th><h3>Author</h3></th>
+            <th style="width: 110px;"><h3>Quantity</h3></th>
+            <th style="width: 110px;"><h3>Price</h3></th>
+            <th style="width: 150px;"><a class="button3" asp-area="Guest" asp-controller="GuestViews" asp-action="Books">Browse more</a></th>
+        </tr>
+
+        @{
+            int x = 0;
+        }
+        @foreach (var i in Model)
+        {
+            x++;
+
+            <tr style="position:relative;">
+                <td>@x</td>
+                <td>@i.Title</td>
+                <td>@i.Author</td>
+                <td>
+                    @i.Quantity
+                    <a class="button1a" asp-controller="CartActions" asp-action="Plus" asp-route-id=@i.Id><i class="fa fa-solid fa-plus"></i></a>
+                    <a class="button1b" asp-controller="CartActions" asp-action="Minus" asp-route-id=@i.Id><i class="fa fa-solid fa-minus"></i></a>
+                </td>
+                <td>@i.Price lei</td>
+                <td><a class="button2" asp-controller="CartActions" asp-action="Delete" asp-route-id=@i.Id>Delete</a></td>
+            </tr>
+        }
+
+    </table>
+
+    @{
+        double total = 0;
+    }
+    @foreach (var i in Model)
+    {
+        total += i.Price;
+    }
+
+    <div class="order">
+        <p style="font-size: 85px; display:inline;">Total:</p>
+        <p style="font-size: 45px; display:inline;">@total lei</p>
+        <a class="button4" asp-controller="CartActions" asp-action="Order">Order now!</a>
+    </div>
+
+    <span class="temp">@TempData["Info1"]</span>
+    <span class="temp" style="margin-left: 200px;">@TempData["Info2"]</span>
+
+    @if (Model.Count > 0)
+    {
+        <span class="time">Arrival time: @DateTime.Now.AddDays(7).ToShortDateString()</span>
+    }
+
+</body>
+</html>

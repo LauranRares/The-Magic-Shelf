@@ -1,0 +1,189 @@
+﻿@model List<BooksDB>
+
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] The Magic Shelf - Books</title>
+
+    <style>
+        .page {
+            margin-left: 50px;
+            margin-right: 150px;
+            display: block;
+        }
+
+        .title {
+            font-family: 'White Storm';
+            font-size: 70px;
+            margin-left: 300px;
+        }
+
+        .title2 {
+            font-family: 'White Storm';
+            font-size: 40px;
+            color: #3a2613;
+        }
+
+        .temp {
+            font-family: 'White Storm';
+            font-size: 40px;
+            margin-left: 465px;
+            color: #cc3300;
+        }
+
+        .border {
+            border: 7px solid #4d2600;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px;
+            width: 20%;
+            height: 510px;
+            float: left;
+            text-align: center;
+            position: relative;
+        }
+
+        .borderbtn {
+            left: 110px;
+            top: 480px;
+            position: absolute;
+        }
+
+        img {
+            width: 200px;
+            height: 300px;
+            padding: 20px;
+        }
+
+            img:hover {
+                opacity: 0.5;
+            }
+
+        .button {
+            border: 3px solid #3a2613;
+            background-color: #ffdf80;
+            padding: 5px;
+            font-family: 'White Storm';
+            color: #3a2613;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+            .button:hover {
+                opacity: 0.7;
+            }
+
+        .rightMenu {
+            position: fixed;
+            right: 0;
+            height: 100%;
+            width: 20%;
+            margin-top: -17.8px;
+            text-align: center;
+            background-image: url('/Images/background2.jfif');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            padding: 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="rightMenu">
+        <div style="padding-bottom: 30px;">
+            <form>
+                <label for="quicksearch"><h3 class="title2">Quick search:</h3></label>
+                <input type="text" id="quicksearch"></input><br />
+                <input type="button" class="button" style="font-size: 20px; margin-top: 3px;" value="Search" onclick="search(document.getElementById('quicksearch').value)">
+
+            </form>
+        </div>
+
+        <script>
+            function search(string) {
+                window.find(string);
+            }
+        </script>
+
+        <div style="padding-bottom: 30px;">
+            <form asp-controller="Operations" asp-action="Sort">
+                <h3 class="title2">Sort by:</h3>
+
+                <input type="radio" name="sorting" value="Name A-Z" />
+                <label for="Name A-Z">Name A-Z</label><br />
+                <input type="radio" name="sorting" value="Name Z-A" />
+                <label for="Name Z-A">Name Z-A</label><br />
+                <input type="radio" name="sorting" value="Price <" />
+                <label for="Price <">Price < </label><br />
+                <input type="radio" name="sorting" value="Price >" />
+                <label for="Price >">Price ></label><br />
+
+                <input type="submit" class="button" style="font-size: 20px; margin-top: 5px; width: 60px;" value="Sort">
+            </form>
+        </div>
+
+        <div>
+            <form asp-controller="Operations" asp-action="Category">
+                <h3 class="title2">Category:</h3>
+
+                <input type="radio" name="categorizing" value="Adventure" />
+                <label for="Adventure">Adventure</label><br />
+                <input type="radio" name="categorizing" value="Comedy" />
+                <label for="Comedy">Comedy</label><br />
+                <input type="radio" name="categorizing" value="Drama" />
+                <label for="Drama">Drama</label><br />
+                <input type="radio" name="categorizing" value="Dystopian" />
+                <label for="Dystopian">Dystopian</label><br />
+                <input type="radio" name="categorizing" value="Fantasy" />
+                <label for="Fantasy">Fantasy</label><br />
+                <input type="radio" name="categorizing" value="History" />
+                <label for="History">History</label><br />
+                <input type="radio" name="categorizing" value="Horror" />
+                <label for="Horror">Horror</label><br />
+                <input type="radio" name="categorizing" value="Political" />
+                <label for="Political">Political</label><br />
+                <input type="radio" name="categorizing" value="Romance" />
+                <label for="Romance">Romance</label><br />
+                <input type="radio" name="categorizing" value="Science Fiction" />
+                <label for="Science Fiction">Science Fiction</label><br />
+
+                <input type="submit" class="button" style="font-size: 20px; margin-top: 5px; width: 60px;" value="Select">
+            </form>
+        </div>
+    </nav>
+
+    <h1 class="title">Feel free to browse our store</h1>
+
+    <span class="temp">@TempData["Info"]</span>
+
+    @{
+        bool x;
+    }
+    <div class="page">
+
+        @foreach (var i in Model)
+        {
+            <div class="border">
+                <img src="@i.Image" />
+                <h2>@i.Title,</h2>
+                <h3>@i.Author</h3>
+                <h4>
+                    <i>
+                        @i.Genre1 @if (i.Genre1 != i.Genre2)
+                        {
+                            <i>, </i> @i.Genre2
+                        }
+                    </i>
+                </h4><br />
+                <footer class="borderbtn">
+                    <i>@i.Price lei</i><br /><br />
+                    <a class="button" asp-area="User" asp-controller="CartActions" asp-action="AddNow" asp-route-id=@i.Id>Add now!</a>
+                </footer>
+            </div>
+        }
+
+    </div>
+
+</body>
+</html>
